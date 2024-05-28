@@ -1,20 +1,20 @@
-import { useEffect, useState } from 'react';
-import eventEmitter from '../lib/eventEmitter';
+import { useContext, useEffect, useState } from 'react';
+//import eventEmitter from '../lib/eventEmitter';
 import { useNavigate } from 'react-router-dom';
+import { MyContext } from "../MyContext";
 
 function LoginForm() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const {authed,setAuthed}=useContext(MyContext)
     const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         // Create a data object with the username and password
         const data = {
             username: username,
             password: password
         };
-
         try {
             const response = await fetch('https://www.jeevikasjy.in/livelihood/api/token', {
                 method: 'POST',
@@ -23,15 +23,15 @@ function LoginForm() {
                 },
                 body: JSON.stringify(data)
             });
-
-            if (response.ok) {
-                
+            if (response.ok) {          
                 const data = await response.json()
                 
                 const accessToken = data.accessToken
                
                 // Handle successful login
-                eventEmitter.emit('logged-in', { token: accessToken })
+                console.log(accessToken)
+                setAuthed(accessToken)
+                //eventEmitter.emit('logged-in', { token: accessToken })
                 console.log('Login successful');
             } else {
                 // Handle unsuccessful login

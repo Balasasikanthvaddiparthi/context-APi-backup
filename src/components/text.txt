@@ -84,3 +84,16 @@ function LoginForm() {
 }
 
 export default LoginForm;
+//////////////////
+
+// useEffect(() => {
+  //   const handleLoggedIn = (e) => {
+  //     window.localStorage.setItem("token", JSON.stringify(e.token))
+  //     setIsAuthenticated(true)
+  //     navigate("/")
+  //   }
+  //   eventEmitter.on('logged-in', handleLoggedIn);
+  //   return () => {
+  //     eventEmitter.off('logged-in', handleLoggedIn);
+  //   };
+  // }, [])

@@ -1,7 +1,11 @@
 
 import { Link } from 'react-router-dom'
+import { useContext } from "react";
+import { MyContext } from "../MyContext";
 
 export default function SideBar() {
+
+    const {role}=useContext(MyContext)
     return (
         <div>
             <div className=" sticky top-0 inset-x-0 z-20 bg-white border-y px-4 sm:px-6 md:px-8 lg:hidden dark:bg-neutral-800 dark:border-neutral-700">
@@ -50,13 +54,16 @@ export default function SideBar() {
                                 Profile
                             </Link>
                         </li>
-                        <li>
+                        
+                        {   role==="Superadmin" &&(
+                            <li>
                             <Link to="/weather" className="flex items-center gap-x-3 py-2 px-2.5 bg-gray-700 text-sm text-white rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-600">
 
                                 <svg className="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg>
                                 Weather
                             </Link>
                         </li>
+                        )}
                     </ul>
                 </nav>
 
